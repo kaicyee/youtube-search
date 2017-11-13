@@ -1,0 +1,1 @@
+App displays a Youtube search with clickable thumbnails to navigate back to the original videos. 
