@@ -27,6 +27,7 @@ function renderResult(result) {
   return template;
 }
 
+// calling the API function and passing the manipulator as a call back
 function displayYouTubeSearchData(data) {
   let results = data.items.map(function(item, index) {
     return renderResult(item);
