@@ -19,10 +19,26 @@ function getDataFromApi(searchTerm, callback) {
 
 // function that manipulates the API (on callback)
 function renderResult(result) {
+  console.log(result);
+
   let template = $(RESULT_HTML_TEMPLATE);
   template.find(".js-image").attr("src", result.snippet.thumbnails.medium.url);
-  template.find(".js-image-link").attr("href", 
-  'https://www.youtube.com/watch?v=' + result.id.videoId)
+
+  // Performing a match operation for all cases
+  switch (result.id.kind) {
+    case 'youtube#channel':
+      template.find(".js-image-link").attr("href", 'https://www.youtube.com/channel/' + result.id.channelId);
+      break;
+    case 'youtube#playlist':
+      template.find(".js-image-link").attr("href", 'https://www.youtube.com/playlist?list=' + result.id.playlistId);
+      break;
+    case 'youtube#video':
+      template.find(".js-image-link").attr("href", 'https://www.youtube.com/watch?v=' + result.id.videoId);
+      break;
+  }
+
+  // template.find(".js-image-link").attr("href", 
+  // 'https://www.youtube.com/watch?v=' + result.id.videoId)
   console.log(result.name);
   return template;
 }
