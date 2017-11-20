@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
@@ -11,12 +11,13 @@
         <link href="index.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-      <main>
+      <main role="main">
         <h1>Search YouTube Videos</h1>
           <form action="#" class="js-search-form">
             <label for="query"></label>
-            <input type="text" class="js-query">
-            <button type="submit">Search</button>
+            <input type="text" class="js-query" name="query" aria-labelledby="query">
+            <button type="submit" id="query" name="query">Search</button>
+            <!-- both input and the search button need some kind of aria label -->
           </form>
           
           <h2>Results</h2>

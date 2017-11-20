@@ -23,9 +23,11 @@ function renderResult(result) {
   console.log(result);
 
   let template = $(RESULT_HTML_TEMPLATE);
-  template.find(".js-image").attr("src", result.snippet.thumbnails.medium.url);
 
   template.find(".js-title").html(result.snippet.title);
+
+  template.find(".js-image").attr("src", result.snippet.thumbnails.medium.url);
+
 
   // Performing a match operation for all cases
   switch (result.id.kind) {
