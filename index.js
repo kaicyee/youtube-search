@@ -3,6 +3,7 @@ let YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 let RESULT_HTML_TEMPLATE = (
   '<div>' +
+    '<h3 class="js-title"></h3>' +
     '<a class="js-image-link" href=""><img class="js-image" src=""></a>' +
   '</div>'
 );
@@ -23,6 +24,8 @@ function renderResult(result) {
 
   let template = $(RESULT_HTML_TEMPLATE);
   template.find(".js-image").attr("src", result.snippet.thumbnails.medium.url);
+
+  template.find(".js-title").html(result.snippet.title);
 
   // Performing a match operation for all cases
   switch (result.id.kind) {
