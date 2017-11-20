@@ -4,8 +4,9 @@ let YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 let RESULT_HTML_TEMPLATE = (
   '<div>' +
     '<h3 class="js-title"></h3>' +
-    '<a class="js-image-link" href=""><img class="js-image" src=""></a>' +
+    '<a class="js-image-link" href=""><img class="js-image" src="" alt=""></a>' +
   '</div>'
+  // alt="" will work for acessibility because the title is used for context
 );
 
 // function that gets the API
