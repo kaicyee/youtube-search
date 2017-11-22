@@ -2,9 +2,9 @@ let YOUTUBE_SEARCH_URL = 'https://www.googleapis.com/youtube/v3/search';
 
 
 let RESULT_HTML_TEMPLATE = (
-  '<div id="youtube-link">' +
+  '<div id="youtube-@type-@youtube-id">' +
     '<h3 class="js-title"></h3>' +
-    '<a class="js-image-link" aria-labelledby="youtube-link" href=""><img class="js-image" src="" alt=""></a>' +
+    '<a class="js-image-link" aria-label="youtube-video" href=""><img class="js-image" src="" alt=""><span class="videolink">Click here for YouTube video</span></a>' +
   '</div>'
   //axe doesn't like that div id="youtube-link" because it's repeated to each result but in essence it does the job
   //alt="" will work for acessibility because the title is used for context
@@ -21,10 +21,14 @@ function getDataFromApi(searchTerm, callback) {
 }
 
 // function that manipulates the API (on callback)
-function renderResult(result) {
+function renderResult(result, index) {
   console.log(result);
 
-  let template = $(RESULT_HTML_TEMPLATE);
+  const html = RESULT_HTML_TEMPLATE
+    .replace('@type', result.id.kind.substr(8))
+    .replace('@youtube-id', result.id.channelId || result.id.playlistId || result.id.videoId)
+
+  let template = $(html);
 
   template.find(".js-title").html(result.snippet.title);
 
@@ -53,7 +57,7 @@ function renderResult(result) {
 // calling the API function and passing the manipulator as a call back
 function displayYouTubeSearchData(data) {
   let results = data.items.map(function(item, index) {
-    return renderResult(item);
+    return renderResult(item, index);
   });
   $('.js-search-results').html(results);
 }
